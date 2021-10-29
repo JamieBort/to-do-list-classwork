@@ -1,25 +1,14 @@
 import React from 'react';
-
-const todoList = [
-  {
-    uniqueIdentifier: 1,
-    title: "The Bad Guys in Attack of the Zittens",
-  },
-  {
-    uniqueIdentifier: 2,
-    title: "Knuffle Bunny : a cautionary tale",
-  },
-  {
-    uniqueIdentifier: 3,
-    title: "Far from home",
-  },
-];
+import AddTodoForm from './AddTodoForm';
+import TodoList from './TodoList';
+// import AddTodoForm from './AddTodoForm';
 
 function App() {
   return (
     <div>
       <h1>Todo List</h1>
-      <ul>{todoList.map((item) => <li key={item.uniqueIdentifier}>{item.title}</li>)}</ul>
+      <TodoList />
+      <AddTodoForm/>
     </div>
   );
 }
