@@ -3,27 +3,28 @@
 import React from "react";
 import TodoListItem from "./TodoListItem";
 
-const todoList = [
-    {
-        uniqueIdentifier: 1,
-        title: "The Bad Guys in Attack of the Zittens",
-    },
-    {
-        uniqueIdentifier: 2,
-        title: "Knuffle Bunny : a cautionary tale",
-    },
-    {
-        uniqueIdentifier: 3,
-        title: "Far from home",
-    },
-];
+// const todoList = [
+//     {
+//         uniqueIdentifier: 1,
+//         title: "The Bad Guys in Attack of the Zittens",
+//     },
+//     {
+//         uniqueIdentifier: 2,
+//         title: "Knuffle Bunny : a cautionary tale",
+//     },
+//     {
+//         uniqueIdentifier: 3,
+//         title: "Far from home",
+//     },
+// ];
 
-function TodoList() {
+function TodoList(props) {
+    // console.log("props.todoList: ", props.todoList) // It's an empty array.
     return (
         <div>
             {/* <ul>{todoList.map((item) => <li key={item.uniqueIdentifier}>{item.title}</li>)}</ul> */}
             <ul>
-                <TodoListItem list={todoList}/>
+                <TodoListItem list={props.todoList}/>
             </ul>
         </div>
     )
