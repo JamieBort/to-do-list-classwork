@@ -20,12 +20,19 @@ function AddTodoForm(props) {
         // const todoTitle = event.target.todoTitle.value;
 
         console.log("todoTitle: ", todoTitle);
+
         // props.onAddTodo(event.target.todoTitle.value);
 
-        props.onAddTodo(todoTitle);
+        // props.onAddTodo(todoTitle);
+
+        props.onAddTodo({
+            title: todoTitle,
+            id: Date.now(),
+        }
+        );
 
         // event.target.value = "";
-        
+
         setTodoTitle("");
     }
 
@@ -37,7 +44,7 @@ function AddTodoForm(props) {
                 </label>
                 {/* <input id="todoTitle" name="title"></input> */}
 
-                <input id="bens" value={todoTitle} onChange={handleTitleChange}></input>
+                <input value={todoTitle} onChange={handleTitleChange}></input>
                 <button>Add</button>
             </form>
         </div>
