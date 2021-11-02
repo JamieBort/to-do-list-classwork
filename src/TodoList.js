@@ -18,13 +18,17 @@ import TodoListItem from "./TodoListItem";
 //     },
 // ];
 
+
+
 function TodoList(props) {
+    const {todoList} =props;
+    
     // console.log("props.todoList: ", props.todoList) // It's an empty array.
     return (
         <div>
             {/* <ul>{todoList.map((item) => <li key={item.uniqueIdentifier}>{item.title}</li>)}</ul> */}
             <ul>
-                <TodoListItem list={props.todoList}/>
+                <TodoListItem list={todoList}/>
             </ul>
         </div>
     )

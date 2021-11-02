@@ -24,8 +24,8 @@ function AddTodoForm(props) {
         // props.onAddTodo(event.target.todoTitle.value);
 
         // props.onAddTodo(todoTitle);
-
-        props.onAddTodo({
+        const { onAddTodo } = props;
+        onAddTodo({
             title: todoTitle,
             id: Date.now(),
         }
