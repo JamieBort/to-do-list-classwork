@@ -14,13 +14,7 @@ function App() {
   return (
     <div>
       <h1>Todo List</h1>
-      {/* <AddTodoForm /> */}
-
-      {/* <AddTodoForm onAddTodo={setNewTodo} />
-      <p>{newTodo}</p> */}
-
       <AddTodoForm onAddTodo={addTodo} />
-      
       <TodoList todoList={todoList} />
 
     </div>

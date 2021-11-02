@@ -2,8 +2,7 @@
 
 import React from "react";
 
-function TodoListItem(props) {
-    const {list}=props;
+function TodoListItem({list}) {
     return (
         <div>
             {/* <ul>{props.list.map((item) => <li key={item.uniqueIdentifier}>{item.title}</li>)}</ul> */}
