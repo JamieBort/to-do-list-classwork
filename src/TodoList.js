@@ -1,17 +1,16 @@
 // src/TodoList.js
 
-import React from "react";
-import TodoListItem from "./TodoListItem";
+import React from 'react';
+import TodoListItem from './TodoListItem';
 
 function TodoList({ todoList }) {
-    return (
-        <div>
-            {/* <ul>{todoList.map((item) => <li key={item.uniqueIdentifier}>{item.title}</li>)}</ul> */}
-            <ul>
-                <TodoListItem list={todoList} />
-            </ul>
-        </div>
-    )
+	return (
+		<div>
+			<ul>
+				<TodoListItem list={todoList} /> {/* An array (of objects) gets passed into TodoListItem. */}
+			</ul>
+		</div>
+	);
 }
 
 export default TodoList;
