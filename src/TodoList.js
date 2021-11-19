@@ -4,6 +4,7 @@ import React from 'react';
 import TodoListItem from './TodoListItem';
 
 function TodoList({ todoList }) {
+	console.log(todoList);
 	return (
 		<div>
 			<ul>
