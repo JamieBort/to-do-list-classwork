@@ -39,11 +39,11 @@ function App() {
 	};
 
 	return (
-		<div>
+		<React.Fragment>
 			<h1>Todo List</h1>
 			<AddTodoForm onAddTodo={addTodo} /> {/* A function gets passed into AddTodoForm. */}
 			<TodoList todoList={todoList} /> {/* An array (of objects) gets passed into TodoList. */}
-		</div>
+		</React.Fragment>
 	);
 }
 
