@@ -5,7 +5,7 @@ import AddTodoForm from './AddTodoForm';
 import TodoList from './TodoList';
 
 function App() {
-	const [ todoList, setTodoList ] = useState([ JSON.parse(localStorage.getItem('savedTodoList')) ]);
+	const [ todoList, setTodoList ] = useState([]);
 	// console.log(localStorage.getItem('savedTodoList'));
 
 	const addTodo = (newTodo) => {
@@ -14,10 +14,26 @@ function App() {
 
 	useEffect(
 		() => {
-			localStorage.setItem('savedTodoList', JSON.stringify(todoList));
+			if (todoList.length > 0) {
+				console.log('todoList is not empty', todoList);
+				localStorage.setItem('savedTodoList', JSON.stringify(todoList));
+			} else console.log('todoList is empty', todoList);
 		},
 		[ todoList ],
 	);
+
+	useEffect(() => {
+		if (localStorage.getItem('savedTodoList') === null)
+			console.log('local storage is empty ', localStorage.getItem('savedTodoList'));
+		else {
+			console.log('local is not empty ', localStorage.getItem('savedTodoList'));
+			setTodoList(JSON.parse(localStorage.getItem('savedTodoList')));
+		}
+	}, []);
+
+	if (localStorage.getItem('savedTodoList') === null)
+		console.log('local storage is empty 2', localStorage.getItem('savedTodoList'));
+	else console.log('local storage is not empty 2', localStorage.getItem('savedTodoList'));
 
 	return (
 		<div>
