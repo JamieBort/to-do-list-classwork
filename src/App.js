@@ -38,11 +38,48 @@ function App() {
 		setTodoList([ ...todoList, newTodo ]);
 	};
 
+	// Define a new handler function named removeTodo with parameter id
+	const removeTodo = (an_id) => {
+		// removes each todo item.
+
+		// console.log('todoList: ', todoList);
+		// console.log('an_id: ', an_id);
+		// console.log('todoList[0].id: ', todoList[0].id);
+		// console.log('todoList[1].id: ', todoList[1].id);
+
+		// //  Inside this function, remove the item with the given id from todoList
+		// // hint: filter or splice methods
+		// const newTodoList = todoList.filter(
+		// 	// 	// (story) => item.objectID !== story.objectID
+		// 	(todos) => an_id !== todoList[0].id,
+		// );
+
+		// const newTodoList = [];
+
+		todoList.forEach((element) => {
+			if (element.id === an_id) {
+				console.log('element.id: ', element.id);
+				console.log('an_id: ', an_id);
+				// remove item here
+				let newTodoList = todoList.filter(
+					// 	// (story) => item.objectID !== story.objectID
+					(abc) => abc.id,
+				);
+				// return (newTodoList = []);
+				console.log('newTodoList: ', newTodoList);
+			}
+			// console.log(newTodoList);
+			// setTodoList(newTodoList); // pass the modified array
+		});
+		// console.log(newTodoList);
+		// setTodoList(newTodoList); // pass the modified array
+	};
+
 	return (
 		<React.Fragment>
 			<h1>Todo List</h1>
-			<AddTodoForm onAddTodo={addTodo} /> {/* A function gets passed into AddTodoForm. */}
-			<TodoList todoList={todoList} /> {/* An array (of objects) gets passed into TodoList. */}
+			<AddTodoForm onAddTodo={addTodo} />
+			<TodoList todoList={todoList} onRemoveTodo={removeTodo} />
 		</React.Fragment>
 	);
 }

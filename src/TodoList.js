@@ -3,7 +3,7 @@
 import React from 'react';
 import TodoListItem from './TodoListItem';
 
-function TodoList({ todoList }) {
+function TodoList({ todoList, onRemoveTodo }) {
 	// console.log('todoList: ', todoList);
 	// if todoList.length === 0 return <h1>Get started by creating your first Todo!</h1>. else todolist.map(etc....)
 	if (todoList.length === 0) return <p>Get started by creating your first Todo!</p>;
@@ -14,7 +14,7 @@ function TodoList({ todoList }) {
 					<strike>Get started by creating your first Todo!</strike>
 				</p>
 				<ul>
-					<TodoListItem list={todoList} /> {/* An array (of objects) gets passed into TodoListItem. */}
+					<TodoListItem list={todoList} removeTodo={onRemoveTodo} />
 				</ul>
 			</div>
 		);
