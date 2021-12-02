@@ -2,12 +2,15 @@
 
 import React from 'react';
 
-const InputWithLabel = (props) => {
+const InputWithLabel = ({ htmlFor, label, value, onChange, children }) => {
 	return (
 		<React.Fragment>
-			<label htmlFor={props.htmlFor}>Title: </label>
+			<label htmlFor={htmlFor}>
+				{/* {label} */}
+				{children}
+			</label>
 
-			<input value={props.value} onChange={props.onChange} />
+			<input value={value} onChange={onChange} />
 		</React.Fragment>
 	);
 };
