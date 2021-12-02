@@ -2,7 +2,18 @@
 
 import React from 'react';
 
-const InputWithLabel = ({ htmlFor, label, value, onChange, children }) => {
+const InputWithLabel = ({ htmlFor, label, value, onChange, children, isFocused }) => {
+	const inputRef = React.useRef();
+
+	React.useEffect(
+		() => {
+			if (isFocused && inputRef.current) {
+				inputRef.current.focus();
+			}
+		},
+		[ isFocused ],
+	);
+
 	return (
 		<React.Fragment>
 			<label htmlFor={htmlFor}>
@@ -10,7 +21,7 @@ const InputWithLabel = ({ htmlFor, label, value, onChange, children }) => {
 				{children}
 			</label>
 
-			<input value={value} onChange={onChange} />
+			<input value={value} onChange={onChange} autoFocus={isFocused} ref={inputRef} />
 		</React.Fragment>
 	);
 };
