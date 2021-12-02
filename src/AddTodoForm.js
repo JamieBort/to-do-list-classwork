@@ -25,7 +25,7 @@ function AddTodoForm({ onAddTodo }) {
 	return (
 		<div>
 			<form onSubmit={handleAddTodo}>
-				<InputWithLabel htmlFor="todoTitle" value={todoTitle} onChange={handleTitleChange} />
+				<InputWithLabel htmlFor="todoTitle" value={todoTitle} onChange={handleTitleChange} title="Title:" />
 
 				{/* moved to Inputwithlabel.js */}
 				{/* <label htmlFor="todoTitle">Title: </label> */}
