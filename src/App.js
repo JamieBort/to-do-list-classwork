@@ -42,7 +42,7 @@ function App() {
 	const removeTodo = (an_id) => {
 		// removes each todo item.
 
-		// console.log('todoList: ', todoList);
+		console.log('todoList: ', todoList);
 		// console.log('an_id: ', an_id);
 		// console.log('todoList[0].id: ', todoList[0].id);
 		// console.log('todoList[1].id: ', todoList[1].id);
@@ -58,18 +58,28 @@ function App() {
 
 		todoList.forEach((element) => {
 			if (element.id === an_id) {
+				console.log('element: ', element);
 				console.log('element.id: ', element.id);
 				console.log('an_id: ', an_id);
 				// remove item here
-				let newTodoList = todoList.filter(
-					// 	// (story) => item.objectID !== story.objectID
-					(abc) => abc.id,
+				const newTodoList = todoList.filter(
+					// 	// 	// (story) => item.objectID !== story.objectID
+					(abc) => abc.id !== an_id,
 				);
+
 				// return (newTodoList = []);
 				console.log('newTodoList: ', newTodoList);
+				setTodoList(newTodoList); // pass the modified array
 			}
 			// console.log(newTodoList);
 			// setTodoList(newTodoList); // pass the modified array
+
+			// setTodoList([
+			// 	{
+			// 		id: 1007,
+			// 		title: 'seven',
+			// 	},
+			// ]);
 		});
 		// console.log(newTodoList);
 		// setTodoList(newTodoList); // pass the modified array
