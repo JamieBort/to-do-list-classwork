@@ -9,10 +9,11 @@ function TodoListItem({ list, removeTodo }) {
 				{list.map((item) => (
 					<li key={item.id}>
 						{item.title}
+						{': '}
 						{/* <button type="button" onClick={() => onRemoveItem(item)}>*/}
 						{/* <button type="button" onClick={removeTodo(item.id)}> */}
 						<button type="button" onClick={() => removeTodo(item.id)}>
-							Dismiss
+							Remove
 						</button>
 					</li>
 				))}

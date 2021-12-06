@@ -5,7 +5,6 @@ import TodoListItem from './TodoListItem';
 
 function TodoList({ todoList, onRemoveTodo }) {
 	// console.log('todoList: ', todoList);
-	// if todoList.length === 0 return <h1>Get started by creating your first Todo!</h1>. else todolist.map(etc....)
 	if (todoList.length === 0) return <p>Get started by creating your first Todo!</p>;
 	else
 		return (
