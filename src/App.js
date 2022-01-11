@@ -37,13 +37,42 @@ function App() {
 	// const [ todoList, setTodoList ] = useSemiPersistentState();
 
 	const [ todoList, setTodoList ] = useState([]);
+
+	const [ isLoading, setIsLoading ] = useState(true);
+
+	useEffect(() => {
+		new Promise((resolve, reject) =>
+			// resolve({ data: { todoList: todoList } })
+			setTimeout(
+				() =>
+					resolve({
+						// data: { todoList: todoList }
+						data: {
+							todoList: JSON.parse(localStorage.getItem('savedTodoList')),
+						},
+					}),
+				2000,
+			),
+		)
+			// ;
+			.then((result) => {
+				setTodoList(result.data.todoList);
+				// console.log(result.data.todoList);
+				// localStorage.setItem('savedTodoList', JSON.stringify(result.data.todoList));
+				// localStorage.setItem('savedTodoList', JSON.stringify(todoList));
+				setIsLoading(false);
+			});
+	}, []);
+
 	// This saves the list in local storage (in the browser).
 	useEffect(
 		() => {
-			if (todoList.length > 0) {
-				console.log('todoList is not empty', todoList);
-				localStorage.setItem('savedTodoList', JSON.stringify(todoList));
-			} else console.log('todoList is empty', todoList);
+			if (!isLoading) {
+				if (todoList.length > 0) {
+					console.log('todoList is not empty', todoList);
+					localStorage.setItem('savedTodoList', JSON.stringify(todoList));
+				} else console.log('todoList is empty', todoList);
+			}
 		},
 		[ todoList ],
 	);
@@ -71,7 +100,9 @@ function App() {
 		<React.Fragment>
 			<h1>Todo List</h1>
 			<AddTodoForm onAddTodo={addTodo} />
-			<TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+			{isLoading ? <p>Loading...</p> : <TodoList todoList={todoList} onRemoveTodo={removeTodo} />}
+
+			{/* <TodoList todoList={todoList} onRemoveTodo={removeTodo} /> */}
 		</React.Fragment>
 	);
 }
