@@ -106,7 +106,14 @@ function App() {
 		<React.Fragment>
 			<h1>Todo List</h1>
 			<AddTodoForm onAddTodo={addTodo} />
-			{isLoading ? <p>Loading...</p> : <TodoList todoList={todoList} onRemoveTodo={removeTodo} />}
+			{isLoading ? (
+				<div>
+					<p>Get started by creating your first Todo!</p>
+					<p>Loading...</p>
+				</div>
+			) : (
+				<TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+			)}
 		</React.Fragment>
 	);
 }
