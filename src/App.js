@@ -34,6 +34,15 @@ import TodoList from './TodoList';
 function App() {
 	// const [ todoList, setTodoList ] = useSemiPersistentState();
 	const [ todoList, setTodoList ] = useState([]);
+
+	useEffect(() => {
+		new Promise((resolve, reject) => {
+			setTimeout(() => {
+				resolve({ data: { todoList: todoList } });
+			}, 2000);
+		});
+	}, []);
+
 	// This saves the list in local storage (in the browser).
 	useEffect(
 		() => {
