@@ -32,6 +32,8 @@ import TodoList from './TodoList';
 // };
 
 function App() {
+	console.log('Hello');
+	console.log(process.env.REACT_APP_AIRTABLE_BASE_ID);
 	// const [ todoList, setTodoList ] = useSemiPersistentState();
 
 	const [ todoList, setTodoList ] = useState([]);
@@ -39,22 +41,47 @@ function App() {
 	// I didn't need this isLoading useState. However I added it just in case. Instructions from https://github.com/Code-the-Dream-School/ctd-react-canary/wiki/Lesson-1.7#add-loading-state
 	const [ isLoading, setIsLoading ] = useState(true);
 
-	// useEffect to create a side effect for obtaining the data from an api
+	// // useEffect to create a side effect for obtaining the data from an api
+	// useEffect(() => {
+	// 	new Promise((resolve, reject) => {
+	// 		setTimeout(() => {
+	// 			resolve({
+	// 				data: {
+	// 					// todoList: todoList,
+	// 					todoList: JSON.parse(localStorage.getItem('savedTodoList')),
+	// 				},
+	// 			});
+	// 		}, 2000);
+	// 	}).then((result) => {
+	// 		console.log('result.data.todoList: ', result.data.todoList);
+	// 		setTodoList(result.data.todoList);
+	// 		setIsLoading(false);
+	// 	});
+	// }, []);
+
 	useEffect(() => {
-		new Promise((resolve, reject) => {
-			setTimeout(() => {
-				resolve({
-					data: {
-						// todoList: todoList,
-						todoList: JSON.parse(localStorage.getItem('savedTodoList')),
-					},
-				});
-			}, 2000);
-		}).then((result) => {
-			console.log('result.data.todoList: ', result.data.todoList);
-			setTodoList(result.data.todoList);
-			setIsLoading(false);
+		// 	// fetch(https://api.airtable.com/v0/{BASE_ID}/Default)
+		// 	// fetch('https://api.airtable.com/v0/REACT_APP_AIRTABLE_BASE_ID/Default')
+		fetch('https://api.airtable.com/v0/app0MBpfNqPynhyk8/Default', {
+			headers: { Authorization: 'Bearer keyKK4C8AmdgULejN' },
+		}).then((response) => {
+			console.log(response.json());
+			// console.log(response.json());
 		});
+		// .then((result) => {
+		// 	console.log(result.records);
+		// 	// dispatchStories({
+		// 	//   type: 'STORIES_FETCH_SUCCESS',
+		// 	//   payload: result.hits, // D
+		// // )}
+		// });
+
+		// 	// GET request using fetch inside useEffect React hook
+		// 	fetch('https://api.npms.io/v2/search?q=react')
+		// 		.then(response => response.json())
+		// 		.then(data => setTotalReactPackages(data.total));
+
+		// // empty dependency array means this effect will only run once (like componentDidMount in classes)
 	}, []);
 
 	// This saves the list in local storage (in the browser).
