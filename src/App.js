@@ -31,9 +31,32 @@ import TodoList from './TodoList';
 // 	return [ todoList, setTodoList ];
 // };
 
+const API_ENDPOINT = 'https://api.airtable.com/v0/' + process.env.REACT_APP_AIRTABLE_BASE_ID + '/Default';
+// https://api.airtable.com/v0/{BASE_ID}/Default
+// console.log(process.env.REACT_APP_AIRTABLE_API_KEY);
+// 	console.log(process.env.REACT_APP_AIRTABLE_BASE_ID);
+
+const INIT_OBJECT = { headers: { Authorization: 'Bearer ' + process.env.REACT_APP_AIRTABLE_API_KEY } };
+
+const listsReducer = (state, action) => {
+	switch (action.type) {
+		case 'SET_LISTS':
+			return action.payload;
+		case 'SET_STORIES':
+			return action.payload;
+		case 'REMOVE_STORY':
+			return state.filter((story) => action.payload.objectID !== story.objectID);
+		default:
+			throw new Error();
+	}
+};
+
 function App() {
-	console.log('Hello');
-	console.log(process.env.REACT_APP_AIRTABLE_BASE_ID);
+	// const [stories, dispatchStories] = React.useReducer(
+	// 	storiesReducer,
+	// 	[]
+	//   );
+	const [ lists, dispatchLists ] = React.useReducer(listsReducer, []);
 	// const [ todoList, setTodoList ] = useSemiPersistentState();
 
 	const [ todoList, setTodoList ] = useState([]);
@@ -60,28 +83,21 @@ function App() {
 	// }, []);
 
 	useEffect(() => {
-		// 	// fetch(https://api.airtable.com/v0/{BASE_ID}/Default)
-		// 	// fetch('https://api.airtable.com/v0/REACT_APP_AIRTABLE_BASE_ID/Default')
-		fetch('https://api.airtable.com/v0/app0MBpfNqPynhyk8/Default', {
-			headers: { Authorization: 'Bearer keyKK4C8AmdgULejN' },
-		}).then((response) => {
-			console.log(response.json());
-			// console.log(response.json());
-		});
-		// .then((result) => {
-		// 	console.log(result.records);
-		// 	// dispatchStories({
-		// 	//   type: 'STORIES_FETCH_SUCCESS',
-		// 	//   payload: result.hits, // D
-		// // )}
-		// });
-
-		// 	// GET request using fetch inside useEffect React hook
-		// 	fetch('https://api.npms.io/v2/search?q=react')
-		// 		.then(response => response.json())
-		// 		.then(data => setTotalReactPackages(data.total));
-
-		// // empty dependency array means this effect will only run once (like componentDidMount in classes)
+		fetch(API_ENDPOINT, INIT_OBJECT)
+			.then((response) => {
+				const output = response.json();
+				console.log(output);
+				// console.log(response.json());
+				return output;
+			})
+			.then((result) => {
+				console.log(result);
+				console.log(result.records);
+				// dispatchLists({
+				// 	type: 'SET_LISTS',
+				// 	payload: result.records,
+				// });
+			});
 	}, []);
 
 	// This saves the list in local storage (in the browser).
