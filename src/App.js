@@ -31,12 +31,11 @@ import TodoList from './TodoList';
 // 	return [ todoList, setTodoList ];
 // };
 
-const API_ENDPOINT = 'https://api.airtable.com/v0/' + process.env.REACT_APP_AIRTABLE_BASE_ID + '/Default';
-// https://api.airtable.com/v0/{BASE_ID}/Default
-// console.log(process.env.REACT_APP_AIRTABLE_API_KEY);
-// 	console.log(process.env.REACT_APP_AIRTABLE_BASE_ID);
-
 const INIT_OBJECT = { headers: { Authorization: 'Bearer ' + process.env.REACT_APP_AIRTABLE_API_KEY } };
+const API_ENDPOINT = 'https://api.airtable.com/v0/' + process.env.REACT_APP_AIRTABLE_BASE_ID + '/Default';
+// // https://api.airtable.com/v0/{BASE_ID}/Default
+// console.log(process.env.REACT_APP_AIRTABLE_API_KEY);
+// console.log(process.env.REACT_APP_AIRTABLE_BASE_ID);
 
 const listsReducer = (state, action) => {
 	switch (action.type) {
@@ -64,24 +63,25 @@ function App() {
 	// I didn't need this isLoading useState. However I added it just in case. Instructions from https://github.com/Code-the-Dream-School/ctd-react-canary/wiki/Lesson-1.7#add-loading-state
 	const [ isLoading, setIsLoading ] = useState(true);
 
-	// // useEffect to create a side effect for obtaining the data from an api
-	// useEffect(() => {
-	// 	new Promise((resolve, reject) => {
-	// 		setTimeout(() => {
-	// 			resolve({
-	// 				data: {
-	// 					// todoList: todoList,
-	// 					todoList: JSON.parse(localStorage.getItem('savedTodoList')),
-	// 				},
-	// 			});
-	// 		}, 2000);
-	// 	}).then((result) => {
-	// 		console.log('result.data.todoList: ', result.data.todoList);
-	// 		setTodoList(result.data.todoList);
-	// 		setIsLoading(false);
-	// 	});
-	// }, []);
+	// useEffect to create a side effect for obtaining the data from an "api". This "Api" is replicated by using a setTimeout() method.
+	useEffect(() => {
+		new Promise((resolve, reject) => {
+			setTimeout(() => {
+				resolve({
+					data: {
+						// todoList: todoList,
+						todoList: JSON.parse(localStorage.getItem('savedTodoList')),
+					},
+				});
+			}, 2000);
+		}).then((result) => {
+			console.log('result.data.todoList: ', result.data.todoList);
+			setTodoList(result.data.todoList);
+			setIsLoading(false);
+		});
+	}, []);
 
+	// useEffect to create a side effect for obtaining the data from an (actual) api.
 	useEffect(() => {
 		fetch(API_ENDPOINT, INIT_OBJECT)
 			.then((response) => {
@@ -91,8 +91,10 @@ function App() {
 				return output;
 			})
 			.then((result) => {
-				console.log(result);
-				console.log(result.records);
+				// console.log(result);
+				console.log('result.records: ', result.records);
+				// setTodoList(result.records);
+
 				// dispatchLists({
 				// 	type: 'SET_LISTS',
 				// 	payload: result.records,
@@ -106,7 +108,7 @@ function App() {
 			// I didn't need this first if() statement. However I added it just in case. Instructions from https://github.com/Code-the-Dream-School/ctd-react-canary/wiki/Lesson-1.7#add-loading-state
 			if (!isLoading) {
 				if (todoList.length >= 0) {
-					console.log('todoList is not empty', todoList);
+					// console.log('todoList is not empty', todoList);
 					localStorage.setItem('savedTodoList', JSON.stringify(todoList));
 				} else console.log('todoList is empty', todoList);
 			}
