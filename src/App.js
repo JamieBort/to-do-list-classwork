@@ -4,6 +4,13 @@ import React, { useState, useEffect } from 'react';
 import AddTodoForm from './AddTodoForm';
 // import TodoList from './TodoList';
 import NewTodoList from './NewTodoList';
+import AddAirtableForm from './AddAirtableForm';
+var Airtable = require('airtable');
+var base = new Airtable({ apiKey: process.env.REACT_APP_AIRTABLE_API_KEY }).base(
+	process.env.REACT_APP_AIRTABLE_BASE_ID,
+);
+// console.log(process.env.REACT_APP_AIRTABLE_API_KEY);
+// console.log(process.env.REACT_APP_AIRTABLE_BASE_ID);
 
 // const useSemiPersistentState = () => {
 // 	const [ todoList, setTodoList ] = useState([]);
@@ -151,6 +158,36 @@ function App() {
 		console.log('todoList: ', todoList);
 	};
 
+	const addToAirtable = (newAirtableItem) => {
+		console.log('newAirtableItem.title: ', newAirtableItem.title);
+		// console.log(process.env.REACT_APP_AIRTABLE_API_KEY);
+		// console.log(process.env.REACT_APP_AIRTABLE_BASE_ID);
+
+		base('Default').create(
+			[
+				{
+					fields: {
+						Title: newAirtableItem.title,
+					},
+				},
+				// {
+				// 	fields: {
+				// 		Title: 'Run errands',
+				// 	},
+				// },
+			],
+			function(err, records) {
+				if (err) {
+					console.error(err);
+					return;
+				}
+				records.forEach(function(record) {
+					console.log(record.getId());
+				});
+			},
+		);
+	};
+
 	// Define a new handler function named removeTodo with parameter id
 	const removeTodo = (id) => {
 		// console.log('todoList: ', todoList);
@@ -174,6 +211,7 @@ function App() {
 		<React.Fragment>
 			<h1>Todo List</h1>
 			<AddTodoForm onAddTodo={addTodo} />
+			<AddAirtableForm onAddTodo={addToAirtable} />
 			{isLoading ? (
 				<div>
 					<p>Get started by creating your first Todo!</p>

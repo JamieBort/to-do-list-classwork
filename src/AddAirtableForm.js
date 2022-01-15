@@ -1,10 +1,10 @@
 // src/AddTodoForm.js
-// Used to add items to local storage.
+// Used to add items to Airtable.
 
 import React, { useState } from 'react';
 import InputWithLabel from './InputWithLabel';
 
-function AddTodoForm({ onAddTodo }) {
+function AddAirtableForm({ onAddTodo }) {
 	const [ todoTitle, setTodoTitle ] = useState('');
 
 	const handleTitleChange = (event) => {
@@ -14,8 +14,9 @@ function AddTodoForm({ onAddTodo }) {
 	};
 
 	const handleAddTodo = (event) => {
+		// console.log('event: ', event.value);
 		event.preventDefault();
-		// console.log('todoTitle: ', todoTitle);
+		console.log('todoTitle: ', todoTitle);
 		onAddTodo({
 			title: todoTitle,
 			id: Date.now(),
@@ -42,10 +43,10 @@ function AddTodoForm({ onAddTodo }) {
 				{/* moved to Inputwithlabel.js */}
 				{/* <input value={todoTitle} onChange={handleTitleChange} /> */}
 
-				<button>Add</button>
+				<button>Add to Airtable</button>
 			</form>
 		</div>
 	);
 }
 
-export default AddTodoForm;
+export default AddAirtableForm;
